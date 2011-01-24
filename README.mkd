@@ -29,13 +29,11 @@ the Python Standard Library.
 
 ## Installation
 
-	$ goinstall github.com/kless/goconfig/config
+	git clone git://github.com/raylu/goconfig.git
+	cd goconfig
+	make install
 
-
-## Configuration
-
-Nothing.
-
+See https://github.com/raylu/rbot for example usage.
 
 ## Operating instructions
 
