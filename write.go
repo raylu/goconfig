@@ -26,8 +26,18 @@ func (self *Config) WriteFile(fname string, perm uint32, header string) os.Error
 		return err
 	}
 
+	// write() destroys Config.data, so make a copy
+	confCopy := *self
+	confCopy.data = make(map[string]map[string]*tValue)
+	for section, sectionMap := range(self.data) {
+		confCopy.data[section] = make(map[string]*tValue)
+		for k, v := range(sectionMap) {
+			confCopy.data[section][k] = v
+		}
+	}
+
 	buf := bufio.NewWriter(file)
-	if err = self.write(buf, header); err != nil {
+	if err = confCopy.write(buf, header); err != nil {
 		return err
 	}
 	buf.Flush()
